@@ -1,0 +1,3 @@
+name: Bridge
+version: '${project.version}'
+main: com.bridge.Bridge
