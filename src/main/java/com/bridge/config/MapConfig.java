@@ -1,22 +1,13 @@
 package com.bridge.config;
 
 public class MapConfig {
-    private Coordinate[] spawns;
-    private Coordinate[] beds;
+    private MapSpawn[] spawns;
 
-    public Coordinate[] getSpawns() {
+    public MapSpawn[] getSpawns() {
         return spawns;
     }
 
-    public void setSpawns(Coordinate[] spawns) {
+    public void setSpawns(MapSpawn[] spawns) {
         this.spawns = spawns;
-    }
-
-    public Coordinate[] getBeds() {
-        return beds;
-    }
-
-    public void setBeds(Coordinate[] beds) {
-        this.beds = beds;
     }
 }

@@ -16,8 +16,7 @@ public class Map {
     private static final HashMap<String, Map> instances = new HashMap<String, Map>();
 
     public Clipboard clipboard;
-    public Coordinate[] spawns;
-    public Coordinate[] beds;
+    public MapConfig config;
 
     private Map(File file) throws IOException {
         if(!file.isDirectory() || !file.canRead()) throw new RuntimeException("Error");
@@ -26,10 +25,7 @@ public class Map {
         if (scanner.hasNext()) {
             data += scanner.nextLine();
         }
-
-        MapConfig config = Bridge.gson.fromJson(data, MapConfig.class);
-        spawns = config.getSpawns();
-        beds = config.getBeds();
+        config = Bridge.gson.fromJson(data, MapConfig.class);
     }
 
     public Map getMapByName(String name) {
@@ -47,13 +43,8 @@ public class Map {
             }
         }
     }
-}
 
-/*
- *
- * spawns:
- *  - asdh
- *
- *
- *
- * */
+    public void load(World world) {
+
+    }
+}
