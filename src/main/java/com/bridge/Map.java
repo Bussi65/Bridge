@@ -3,14 +3,11 @@ package com.bridge;
 import com.bridge.config.Coordinate;
 import com.bridge.config.MapConfig;
 import com.sk89q.worldedit.extent.clipboard.Clipboard;
-import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.InvalidConfigurationException;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -22,7 +19,7 @@ public class Map {
     public Coordinate[] spawns;
     public Coordinate[] beds;
 
-    private Map(File file) throws IOException, InvalidConfigurationException {
+    private Map(File file) throws IOException {
         if(!file.isDirectory() || !file.canRead()) throw new RuntimeException("Error");
         Scanner scanner = new Scanner(file);
         String data = "";
@@ -45,7 +42,7 @@ public class Map {
                 instances.put(name, map);
                 return map;
             } catch (Exception e) {
-                System.out.println("Map \""+name+"\" konnte nicht geladen werden.");
+                System.out.printf("Map \"%s\" konnte nicht geladen werden.%n", name);
                 return null;
             }
         }
