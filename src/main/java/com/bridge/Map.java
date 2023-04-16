@@ -8,6 +8,8 @@ import org.bukkit.configuration.InvalidConfigurationException;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -15,7 +17,7 @@ public class Map {
 
     private static final HashMap<String, Map> instances = new HashMap<String, Map>();
 
-    public Clipboard clipboard;
+    public File world;
     public MapConfig config;
 
     private Map(File file) throws IOException {
@@ -25,6 +27,7 @@ public class Map {
         if (scanner.hasNext()) {
             data += scanner.nextLine();
         }
+        world = new File(file, "world");
         config = Bridge.gson.fromJson(data, MapConfig.class);
     }
 
@@ -44,7 +47,7 @@ public class Map {
         }
     }
 
-    public void load(World world) {
-
+    public void load(File sessionFolder) throws IOException {
+        Files.copy(world.toPath(), sessionFolder.toPath());
     }
 }
