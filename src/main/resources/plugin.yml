@@ -1,3 +1,8 @@
 name: Bridge
 version: '${project.version}'
 main: com.bridge.Bridge
+commands:
+  game:
+    usage: "Usage: /game"
+  startgame:
+    usage: "Usage: /startgame <Map>"

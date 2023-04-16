@@ -4,6 +4,7 @@ import com.bridge.config.Coordinate;
 import com.bridge.config.MapConfig;
 import com.sk89q.worldedit.extent.clipboard.Clipboard;
 import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.configuration.InvalidConfigurationException;
 
 import java.io.File;
@@ -31,7 +32,7 @@ public class Map {
         config = Bridge.gson.fromJson(data, MapConfig.class);
     }
 
-    public Map getMapByName(String name) {
+    public static Map getMapByName(String name) {
         if (!name.matches("^[\\w|äöüß]{3,32}$")) return null;
         if (instances.containsKey(name)) {
             return instances.get(name);

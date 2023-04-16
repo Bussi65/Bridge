@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import com.bridge.commands.startgame;
 import com.google.gson.Gson;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -107,6 +108,9 @@ public final class Bridge extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(this, this);
         Bukkit.getPluginCommand("game").setExecutor(this);
         Bukkit.getPluginCommand("game").setTabCompleter(this);
+
+        Bukkit.getPluginCommand("startgame").setExecutor(new startgame());
+        Bukkit.getPluginCommand("startgame").setTabCompleter(new startgame());
         loadconfig();
     }
 
