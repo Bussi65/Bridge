@@ -40,7 +40,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 
-public final class Bridge extends JavaPlugin implements Listener {
+public final class Bridge extends JavaPlugin implements Listener, CommandExecutor, TabCompleter {
 
     public static Gson gson = new Gson();
 

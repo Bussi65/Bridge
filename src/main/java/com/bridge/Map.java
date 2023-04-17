@@ -23,7 +23,7 @@ public class Map {
 
     private Map(File file) throws IOException {
         if(!file.isDirectory() || !file.canRead()) throw new RuntimeException("Error");
-        Scanner scanner = new Scanner(file);
+        Scanner scanner = new Scanner(new File(file, "data.json"));
         String data = "";
         if (scanner.hasNext()) {
             data += scanner.nextLine();
@@ -38,11 +38,12 @@ public class Map {
             return instances.get(name);
         }else {
             try {
-                Map map = new Map(new File(name));
+                Map map = new Map(new File("maps", name));
                 instances.put(name, map);
                 return map;
             } catch (Exception e) {
-                System.out.printf("Map \"%s\" konnte nicht geladen werden.%n", name);
+                e.printStackTrace();
+                System.out.println("Map \""+name+"\" konnte nicht geladen werden.");
                 return null;
             }
         }
@@ -65,7 +66,7 @@ public class Map {
         }
     }
 
-    public void load(File sessionFolder) throws IOException {
-        Files.copy(world.toPath(), sessionFolder.toPath());
+    public World createWorld() {
+        return new WorldCreator(world.getAbsolutePath().replace("home/container/", "")).createWorld();
     }
 }
