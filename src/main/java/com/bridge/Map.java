@@ -48,6 +48,23 @@ public class Map {
         }
     }
 
+    public static Map getMapByName(String parent, String name) {
+        if (!name.matches("^[\\w|äöüß]{3,32}$")) return null;
+        if (instances.containsKey(name)) {
+            return instances.get(name);
+        }else {
+            try {
+                Map map = new Map(new File(parent, name));
+                instances.put(name, map);
+                return map;
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("Map \""+name+"\" konnte nicht geladen werden.");
+                return null;
+            }
+        }
+    }
+
     public void load(File sessionFolder) throws IOException {
         Files.copy(world.toPath(), sessionFolder.toPath());
     }

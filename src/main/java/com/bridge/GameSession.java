@@ -23,9 +23,12 @@ public class GameSession {
             if(i < map.config.getMaxPlayer()) {
                 playersInfo.add(new PlayerInfo(player[i], mapSpawns[i]));
                 player[i].teleport(mapSpawns[i].getSpawn().toLocation(world));
+                player[i].setGameMode(GameMode.SURVIVAL); // Temporary
+                player[i].sendMessage("You were added at: " + mapSpawns[i].getSpawn().toLocation(world).toString()); // DEBUG
             }else {
                 player[i].setGameMode(GameMode.SPECTATOR);
                 player[i].teleport(new Location(world, 0, 60, 0));
+                player[i].sendMessage("You were NOT added"); // DEBUG
             }
         }
     }
