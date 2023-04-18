@@ -30,7 +30,14 @@ public class startgame implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        Map map = Map.getMapByName(args[0]);
+        String smallest = String.valueOf(getSmallestAvailableNumber("GameSessions/loadedMaps"));
+        try {
+            copyDirectory("maps/" + args[0], "GameSessions/loadedMaps/" + smallest);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Map map = Map.getMapByName("GameSessions/loadedMaps", smallest);
+        //map.world.deleteOnExit();
 
         Collection<?> bukkitOnlinePlayer = Bukkit.getOnlinePlayers();
         Player[] onlinePlayer = new Player[bukkitOnlinePlayer.size()];
@@ -56,7 +63,7 @@ public class startgame implements CommandExecutor, TabCompleter {
     }
 
     public static void copyDirectory(String sourcePathStr, String targetPathStr) throws IOException {
-        // GPT code
+        // GPT CODE
         Path source = Paths.get(sourcePathStr);
         Path target = Paths.get(targetPathStr);
         Files.walkFileTree(source, new SimpleFileVisitor<Path>() {
@@ -68,11 +75,15 @@ public class startgame implements CommandExecutor, TabCompleter {
 
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                if (file.getFileName().toString().equals("uid.dat")) {
+                    return FileVisitResult.CONTINUE; // skip copying this file
+                }
                 Files.copy(file, target.resolve(source.relativize(file)));
                 return FileVisitResult.CONTINUE;
             }
         });
     }
+
 
     public static String removeAfterLastChar(String str, char c) {
         int index = str.lastIndexOf(c);

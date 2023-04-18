@@ -6,3 +6,5 @@ commands:
     usage: "Usage: /game"
   startgame:
     usage: "Usage: /startgame <Map>"
+  leave:
+    usage: "Usage: /leave"

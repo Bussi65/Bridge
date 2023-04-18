@@ -50,7 +50,7 @@ public class Map {
     }
 
     public static Map getMapByName(String parent, String name) {
-        if (!name.matches("^[\\w|äöüß]{3,32}$")) return null;
+        //if (!name.matches("^[\\w|äöüß]{3,32}$")) return null;
         if (instances.containsKey(name)) {
             return instances.get(name);
         }else {

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import com.bridge.commands.leave;
 import com.bridge.commands.startgame;
 import com.google.gson.Gson;
 import org.bukkit.Bukkit;
@@ -111,6 +112,9 @@ public final class Bridge extends JavaPlugin implements Listener, CommandExecuto
 
         Bukkit.getPluginCommand("startgame").setExecutor(new startgame());
         Bukkit.getPluginCommand("startgame").setTabCompleter(new startgame());
+
+        Bukkit.getPluginCommand("leave").setExecutor(new leave());
+        Bukkit.getPluginCommand("leave").setTabCompleter(new leave());
         loadconfig();
     }
 
